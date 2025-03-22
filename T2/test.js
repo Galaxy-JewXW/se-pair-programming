@@ -1,9 +1,7 @@
 import assert from "assert";
 
 // Choose proper "import" depending on your PL.
-// import { greedySnakeMoveBarriers } from "./t2_as/build/release.js";
-// import { greedy_snake_move_barriers as greedySnakeMoveBarriers } from "./t2_rust/pkg/t2_rust.js"
-// [Write your own "import" for other PLs.]
+import { greedySnakeMoveBarriers } from "./t2-as/build/release.js";
 
 function greedy_snake_barriers_checker(initial_snake, food_num, foods, barriers, access) {
     if (initial_snake.length !== 8) throw "Invalid snake length";
@@ -32,7 +30,9 @@ function greedy_snake_barriers_checker(initial_snake, food_num, foods, barriers,
         }
 
         // invalid direction
-        if (direction < 0 || direction > 3) return -4; 
+        if (direction < 0 || direction > 3) {
+            return -4;
+        }
 
         let new_snake = [
             current_snake[0] + (direction == 3) - (direction == 1),
@@ -47,10 +47,16 @@ function greedy_snake_barriers_checker(initial_snake, food_num, foods, barriers,
 
 
         // out of range
-        if (new_snake[0] < 1 || new_snake[0] > 8 || new_snake[1] < 1 || new_snake[1] > 8) return -1;
+        if (new_snake[0] < 1 || new_snake[0] > 8 || new_snake[1] < 1 || new_snake[1] > 8) {
+            console.log("out of range");
+            return -1;
+        }
 
         // hit a barrier
-        if (barriers_list.some(ob => ob.x === new_snake[0] && ob.y === new_snake[1])) return -2;
+        if (barriers_list.some(ob => ob.x === new_snake[0] && ob.y === new_snake[1])) {
+            console.log("hit a barrier");
+            return -2;
+        }
 
         // eat food
         let ate_index = -1;
@@ -77,6 +83,7 @@ function greedy_snake_barriers_checker(initial_snake, food_num, foods, barriers,
     }
     
     // timeout
+    console.log("timeout");
     return -3; 
 }
 

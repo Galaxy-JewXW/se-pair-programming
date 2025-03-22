@@ -93,7 +93,7 @@ function generateFood(snake) {
 }
 
 describe('Greedy Snake Random Tests', () => {
-    const testCount = 10000;
+    const testCount = 300000;
     for (let i = 0; i < testCount; i++) {
         it(`should pass random test ${i + 1}`, () => {
             const snake = generateRandomSnake();
