@@ -218,16 +218,19 @@ function isPathAvailable(snakeHead, food, barriersSet) {
 function generateBarriersAccess1(snake, food) {
     const barriersSet = new Set();
     const occupied = new Set();
+    const snakeBodyBarriers = new Set();
     for (let i = 0; i < snake.length; i += 2) {
-        occupied.add(`${snake[i]},${snake[i + 1]}`);
+        const key = `${snake[i]},${snake[i + 1]}`;
+        occupied.add(key);
+        if (i > 0) {
+            snakeBodyBarriers.add(key);
+        }
     }
     occupied.add(`${food[0]},${food[1]}`);
-
     for (let attempt = 0; attempt < 100; attempt++) {
         barriersSet.clear();
-        const barrierCount = Math.floor(Math.random() * 7) + 1;
+        const barrierCount = Math.floor(Math.random() * 5) + 1;
         const tempBarriers = [];
-
         while (tempBarriers.length < barrierCount * 2) {
             const x = Math.floor(Math.random() * 8) + 1;
             const y = Math.floor(Math.random() * 8) + 1;
@@ -237,17 +240,20 @@ function generateBarriersAccess1(snake, food) {
                 barriersSet.add(key);
             }
         }
-
-        if (isPathAvailable({x: snake[0], y: snake[1]}, food, new Set([...barriersSet]))) {
+        const fullBarriers = new Set([...barriersSet, ...snakeBodyBarriers]);
+        if (isPathAvailable(
+            {x: snake[0], y: snake[1]},
+            food,
+            fullBarriers
+        )) {
             return tempBarriers;
         }
     }
-
     throw new Error("无法生成有效障碍物");
 }
 
 describe('Greedy Snake Barriers Tests', () => {
-    const testCount = 10000;
+    const testCount = 50000;
     for (let i = 0; i < testCount; i++) {
         it('should handle access=0 with blocked path', () => {
             let snake, food, barriers;
