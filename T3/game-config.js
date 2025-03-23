@@ -1,8 +1,12 @@
 // Import snake decision functions
-import { greedy_snake_step as snake1 } from './t3-snake-1-{PL}/pkg/snake.js';
-import { greedy_snake_step as snake2 } from './t3-snake-{num}-{PL}/pkg/snake.js';
-import { greedy_snake_step as snake3 } from './t3-snake-{num}-{PL}/pkg/snake.js';
-import { greedy_snake_step as snake4 } from './t3-snake-{num}-{PL}/pkg/snake.js';
+import { greedy_snake_step as snake1 } from './t3-as/build/release.js';
+import { greedy_snake_step as snake2 } from './t3-as/build/release.js';
+import { greedy_snake_step as snake3 } from './t3-as/build/release.js';
+import { greedy_snake_step as snake4 } from './t3-as/build/release.js';
+import { greedy_snake_step as snake5 } from './t3-as/build/release.js';
+import { greedy_snake_step as snake6 } from './t3-as/build/release.js';
+import { greedy_snake_step as snake7 } from './t3-as/build/release.js';
+import { greedy_snake_step as snake8 } from './t3-as/build/release.js';
 // import { greedy_snake_step as snake5 } from './t3-snake-{num}-{PL}/pkg/snake.js';
 // import { greedy_snake_step as snake6 } from './t3-snake-{num}-{PL}/pkg/snake.js';
 // import { greedy_snake_step as snake7 } from './t3-snake-{num}-{PL}/pkg/snake.js';
@@ -17,10 +21,10 @@ export const snakeModules = [
   snake2,
   snake3,
   snake4,
-  // snake5,
-  // snake6,
-  // snake7,
-  // snake8,
+  snake5,
+  snake6,
+  snake7,
+  snake8,
   // You can add more snake decision functions
 ];
 

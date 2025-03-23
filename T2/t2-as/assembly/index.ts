@@ -119,30 +119,8 @@ function findShortestPath(
 
 export function greedySnakeMoveBarriers(snake: i32[], food: i32[], barriers: i32[]): i32 {
     // 各方向有效性
-    const visited: i32[][] = new Array<Array<i32>>(10);
-    for (let i = 0; i <= 9; i++) {
-        visited[i] = new Array<i32>(10).fill(0);
-    }
-    for (let i = 0; i < barriers.length; i += 2) {
-        visited[barriers[i]][barriers[i + 1]] = -1;
-    }
-    visited[snake[0]][snake[1]] = 1;
-
-    for (let i = 0; i <= 16; i++) {
-        for (let j = 1; j <= 8; j++) {
-            for (let k = 1; k <= 8; k++) {
-                if (visited[j][k] >= 0) {
-                    if (visited[j - 1][k] == 1 || visited[j + 1][k] == 1 || visited[j][k - 1] == 1 || visited[j][k + 1] == 1) {
-                        visited[j][k] = 1;
-                    }
-                }
-            }
-        }
-    }
-    if (visited[food[0]][food[1]] < 1) {
-        return -1;
-    }
     const path = findShortestPath(snake[0], snake[1], food[0], food[1], snake[2], snake[3], barriers);
+    if (path.length == 0) return -1;
     if (path[2] == snake[0]) {
         if (path[3] > snake[1]) return 0;
         else return 2;
